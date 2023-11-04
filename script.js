@@ -16,36 +16,62 @@ function playRound (computerSelection,playerSelection) {
     switch (computerSelection) {
         case "rock":
             switch (playerSelection) {
-                case "rock": winner = "Tie! Both players chose ROCK"; break;
-                case "paper": winner = "You Win! PAPER beats ROCK"; break;
-                case "scissors": winner = "You Lose! ROCK beats SCISSORS"; break;
-                default: winner = "Your choise is wrong";
+                case "rock": winner = "tie"; break;
+                case "paper": winner = "player"; break;
+                case "scissors": winner = "computer"; break;
+                default: winner = "error-player";
             }
             break;
         case "paper":
             switch (playerSelection) {
-                case "paper": winner = "Tie! Both players chose PAPER"; break;
-                case "scissors": winner = "You Win! SCISSORS beats PAPER"; break;
-                case "rock": winner = "You Lose! PAPER beats ROCK"; break;
-                default: winner = "Your choise is wrong";
+                case "paper": winner = "tie"; break;
+                case "scissors": winner = "player"; break;
+                case "rock": winner = "computer"; break;
+                default: winner = "error-player";
             }
             break;
         case "scissors":
             switch (playerSelection) {
-                case "scissors": winner = "Tie! Both players chose SCISSORS"; break;
-                case "rock": winner = "You Win! ROCK beats SCISSORS"; break;
-                case "paper": winner = "You Lose! SCISSORS beats PAPER"; break;
-                default: winner = "Your choise is wrong";
+                case "scissors": winner = "tie"; break;
+                case "rock": winner = "player"; break;
+                case "paper": winner = "computer"; break;
+                default: winner = "error-player";
             }
             break;
         default: 
-            winner = "Computer's choise is wrong";
+            winner = "error-computer";
     }
 
     return winner;
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log (`Computer:${computerSelection} VS Player:${playerSelection}`);
-console.log(playRound(computerSelection,playerSelection));
+function game () {
+    let computerWins = 0;
+    let playerWins = 0;
+    let playerSelection;
+    let computerSelection;
+    let result;
+
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Choose rock, paper or scissors: ");
+        computerSelection = getComputerChoice();
+        console.log (`Round ${i+1} - Computer:${computerSelection} VS Player:${playerSelection}`); 
+        result = playRound(computerSelection,playerSelection);
+
+        if ((result == "player") || (result == "error-computer")) {
+            console.log(`YOU win: ${playerSelection} beats ${computerSelection}`);
+            playerWins += 1;
+        } else if ((result == "computer") || (result == "error-player")) {
+            console.log(`COMPUTER wins: ${computerSelection} beats ${playerSelection}`);
+            computerWins += 1;
+        } else {
+            console.log("TIE!");
+        }
+        console.log("---");
+            
+    }
+
+    console.log(`Score - Player: ${playerWins} VS Computer: ${computerWins}`);
+}
+
+game ();
