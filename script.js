@@ -55,37 +55,6 @@ function playRound (e) {
     divScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
 
-/*function game () {
-    let computerWins = 0;
-    let playerWins = 0;
-    let playerSelection;
-    let computerSelection;
-    let result;
-
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Choose rock, paper or scissors: ");
-        computerSelection = getComputerChoice();
-        console.log (`Round ${i+1} - Computer:${computerSelection} VS Player:${playerSelection}`); 
-        result = playRound(computerSelection,playerSelection);
-
-        if ((result == "player") || (result == "error-computer")) {
-            console.log(`YOU win: ${playerSelection} beats ${computerSelection}`);
-            playerWins += 1;
-        } else if ((result == "computer") || (result == "error-player")) {
-            console.log(`COMPUTER wins: ${computerSelection} beats ${playerSelection}`);
-            computerWins += 1;
-        } else {
-            console.log("TIE!");
-        }
-        console.log("---");
-            
-    }
-
-    console.log(`Score - Player: ${playerWins} VS Computer: ${computerWins}`);
-}*/
-
-//game ();
-
 const btnRock = document.querySelector("#rock");
 const btnPaper = document.querySelector("#paper");
 const btnScissors = document.querySelector("#scissors");
