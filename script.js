@@ -8,10 +8,10 @@ function getComputerChoice () {
     return computerChoice
 }
 
-function playRound (computerSelection,playerSelection) {
+function playRound (e) {
     let winner;
-    computerSelection = computerSelection.toLowerCase();
-    playerSelection = playerSelection.toLowerCase();
+    const computerSelection = getComputerChoice().toLowerCase();
+    const playerSelection = e.target.textContent.toLowerCase();
 
     switch (computerSelection) {
         case "rock":
@@ -42,10 +42,20 @@ function playRound (computerSelection,playerSelection) {
             winner = "error-computer";
     }
 
-    return winner;
+    if (winner === "player") {
+        playerScore ++;
+        divRoundResult.textContent = `YOU win! player: ${playerSelection} - computer: ${computerSelection}`;
+    } else if (winner === "computer") {
+        computerScore ++;
+        divRoundResult.textContent = `COMPUTER win! player: ${playerSelection} - computer: ${computerSelection}`;
+    } else {
+        divRoundResult.textContent = `TIE! player: ${playerSelection} - computer: ${computerSelection}`;
+    }
+    
+    divScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
 
-function game () {
+/*function game () {
     let computerWins = 0;
     let playerWins = 0;
     let playerSelection;
@@ -72,6 +82,19 @@ function game () {
     }
 
     console.log(`Score - Player: ${playerWins} VS Computer: ${computerWins}`);
-}
+}*/
 
-game ();
+//game ();
+
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissors = document.querySelector("#scissors");
+const divRoundResult = document.querySelector("#round-result");
+const divScore = document.querySelector("#score");
+
+btnRock.addEventListener("click",playRound);
+btnPaper.addEventListener("click",playRound);
+btnScissors.addEventListener("click",playRound);
+
+let computerScore = 0;
+let playerScore = 0;
