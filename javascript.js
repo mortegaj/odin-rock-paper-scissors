@@ -8,10 +8,6 @@ const ERROR = "error"
 let humanScore = 0;
 let computerScore = 0;
 
-let computerChoice;
-let humanChoice;
-
-
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     if (randomNumber == 0) return ROCK;
@@ -67,30 +63,50 @@ function playRound(humanChoice, computerChoice) {
         winner = "ERROR"
     }
 
-   if (winner == "HUMAN") {
+   return winner;
+
+}
+
+function printWinner (winner) {
+    if (winner == "HUMAN") {
         console.log("Felicitats! Has guanyat");
         humanScore += 1;
    } else if (winner  == "COMPUTER") {
         console.log("Mala sort, has perdut! Torna-ho a intentat");
         computerScore += 1;
-   } else {
+   } else if (winner == "TIE") {
         console.log("Heu empatat!");
+   } else {
+        console.log("Opció escollida incorrecta");
    }
+}
+
+function playGame() {
+    let computerChoice;
+    let humanChoice;
+    let winner;
+
+    for (let i = 1; i <= 5; i++) {
+        console.log("-- RONDA " + i + " ----------");
+        
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+
+        if (humanChoice == QUIT) break;
+        
+        console.log ("Has escollit " + humanChoice + " | l'ordinador ha escollit " + computerChoice);
+        winner = playRound(humanChoice,computerChoice);
+        printWinner (winner);
+        
+        console.log("--------------------");
+    }
+
+    console.log("Puntuació final - Tu: " + humanScore + " | Ordinador: " + computerScore);
 
 }
 
-console.log("--------------------")
+playGame();
 
-computerChoice = getComputerChoice();
-humanChoice = getHumanChoice();
 
-if ((humanChoice == ROCK) || (humanChoice == PAPER) || (humanChoice == SCISSORS)) {
-    console.log ("Has escollit " + humanChoice + " | l'ordinador ha escollit " + computerChoice);
-    playRound(humanChoice,computerChoice);
-} else if (humanChoice == QUIT) {
-    console.log("Has escollit sortir");
-} else {
-    console.log("L'opció escollida no es correcta")
-}
 
-console.log("--------------------");
+
