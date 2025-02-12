@@ -16,18 +16,20 @@ function getComputerChoice() {
     return ERROR;
 }
 
-function getHumanChoice() {
-    let humanChoice = prompt('Escull una opció: (1)' + ROCK + ', (2)' + PAPER + ', (3)' + SCISSORS + ' or (0)' + QUIT);
-    if (humanChoice == 1) return ROCK;
-    if (humanChoice == 2) return PAPER;
-    if (humanChoice == 3) return SCISSORS;
-    if (humanChoice == 0) return QUIT;
-    return ERROR;
+function getHumanChoice(humanChoice) {
+    if (humanChoice == "rock") return ROCK;
+    if (humanChoice == "paper") return PAPER;
+    if (humanChoice == "scissors") return SCISSORS;
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(e) {
     
     let winner = null;
+
+    let humanChoice = getHumanChoice (e.target.id);
+    let computerChoice = getComputerChoice();
+    console.log("human choice: " + humanChoice);
+    console.log("computer choice: " + computerChoice);
 
     if (humanChoice == ROCK) {
         if (computerChoice == ROCK) {
@@ -63,17 +65,18 @@ function playRound(humanChoice, computerChoice) {
         winner = "ERROR"
     }
 
-   return winner;
+   winner;
+   printWinner(winner);
 
 }
 
 function printWinner (winner) {
     if (winner == "HUMAN") {
-        console.log("Felicitats! Has guanyat");
         humanScore += 1;
+        console.log("Felicitats! Has guanyat.");
    } else if (winner  == "COMPUTER") {
-        console.log("Mala sort, has perdut! Torna-ho a intentat");
         computerScore += 1;
+        console.log("Mala sort, has perdut! Torna-ho a intentat");
    } else if (winner == "TIE") {
         console.log("Heu empatat!");
    } else {
@@ -81,32 +84,8 @@ function printWinner (winner) {
    }
 }
 
-function playGame() {
-    let computerChoice;
-    let humanChoice;
-    let winner;
-
-    for (let i = 1; i <= 5; i++) {
-        console.log("-- RONDA " + i + " ----------");
-        
-        computerChoice = getComputerChoice();
-        humanChoice = getHumanChoice();
-
-        if (humanChoice == QUIT) break;
-        
-        console.log ("Has escollit " + humanChoice + " | l'ordinador ha escollit " + computerChoice);
-        winner = playRound(humanChoice,computerChoice);
-        printWinner (winner);
-        
-        console.log("--------------------");
-    }
-
-    console.log("Puntuació final - Tu: " + humanScore + " | Ordinador: " + computerScore);
-
-}
-
-playGame();
-
+const userSelector = document.querySelector("#user-selector");
+userSelector.addEventListener("click", playRound);
 
 
 
