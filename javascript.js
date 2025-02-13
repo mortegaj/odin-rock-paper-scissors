@@ -93,14 +93,28 @@ function printResult (humanChoice,computerChoice,winner) {
         resultDiv.textContent += "ERROR";
     }
 
-    socreDiv.textContent = `TU: ${humanScore} / ORDINADOR: ${computerScore}`;
+    scoreDiv.textContent = `TU: ${humanScore} / ORDINADOR: ${computerScore}`;
+    
+    if (humanScore == 5) {
+        winnerDiv.textContent = "HAS GUANYAT LA PARTIDA"
+        userSelector.removeEventListener("click", playRound);
+    }
+
+    if (computerScore == 5) {
+        winnerDiv.textContent = "HAS PERDUT LA PARTIDA"
+        userSelector.removeEventListener("click", playRound);
+    }
+
+
+
 }
 
 const userSelector = document.querySelector("#user-selector");
 const humanChoiceDiv = document.querySelector("#human-choice");
 const computerChoiceDiv = document.querySelector("#computer-choice");
 const resultDiv = document.querySelector("#result");
-const socreDiv = document.querySelector("#score");
+const scoreDiv = document.querySelector("#score");
+const winnerDiv = document.querySelector("#winner");
 
 userSelector.addEventListener("click", playRound);
 
