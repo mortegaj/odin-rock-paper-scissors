@@ -28,9 +28,7 @@ function playRound(e) {
 
     let humanChoice = getHumanChoice (e.target.id);
     let computerChoice = getComputerChoice();
-    console.log("human choice: " + humanChoice);
-    console.log("computer choice: " + computerChoice);
-
+    
     if (humanChoice == ROCK) {
         if (computerChoice == ROCK) {
             winner = "TIE";
@@ -66,25 +64,44 @@ function playRound(e) {
     }
 
    winner;
-   printWinner(winner);
+   printResult(humanChoice,computerChoice,winner);
 
 }
 
-function printWinner (winner) {
+function printResult (humanChoice,computerChoice,winner) {
+
+    /** 
+     * <div id="human-choice">TU: </div>
+     * <div id="computer-choice">ORDINADOR: </div>
+     * <div id="result"></div>
+     * <div id="score">TU: 0 / ORDINADOR: 0</div>
+     */
+
+    humanChoiceDiv.textContent = "TU: " + humanChoice;
+    computerChoiceDiv.textContent = "ORDINADOR: " + computerChoice;
+    resultDiv.textContent = "GUANYADOR: ";
+    
     if (winner == "HUMAN") {
         humanScore += 1;
-        console.log("Felicitats! Has guanyat.");
-   } else if (winner  == "COMPUTER") {
+        resultDiv.textContent += "TU";
+    } else if (winner  == "COMPUTER") {
         computerScore += 1;
-        console.log("Mala sort, has perdut! Torna-ho a intentat");
-   } else if (winner == "TIE") {
-        console.log("Heu empatat!");
-   } else {
-        console.log("Opció escollida incorrecta");
-   }
+        resultDiv.textContent += "ORDINADOR";
+    } else if (winner == "TIE") {
+        resultDiv.textContent += "EMPAT";
+    } else {
+        resultDiv.textContent += "ERROR";
+    }
+
+    socreDiv.textContent = `TU: ${humanScore} / ORDINADOR: ${computerScore}`;
 }
 
 const userSelector = document.querySelector("#user-selector");
+const humanChoiceDiv = document.querySelector("#human-choice");
+const computerChoiceDiv = document.querySelector("#computer-choice");
+const resultDiv = document.querySelector("#result");
+const socreDiv = document.querySelector("#score");
+
 userSelector.addEventListener("click", playRound);
 
 
