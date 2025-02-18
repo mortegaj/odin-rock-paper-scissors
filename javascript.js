@@ -70,13 +70,6 @@ function playRound(e) {
 
 function printResult (humanChoice,computerChoice,winner) {
 
-    /** 
-     * <div id="human-choice">TU: </div>
-     * <div id="computer-choice">ORDINADOR: </div>
-     * <div id="result"></div>
-     * <div id="score">TU: 0 / ORDINADOR: 0</div>
-     */
-
     humanChoiceDiv.textContent = "TU: " + humanChoice;
     computerChoiceDiv.textContent = "ORDINADOR: " + computerChoice;
     resultDiv.textContent = "GUANYADOR: ";
